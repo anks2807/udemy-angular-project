@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col-xs-12">
+    <form ngForm (ngSubmit)="onsubmit()">
+      <div class="row">
+        <div class="col-sm-5 form-group">
+          <label>Name: </label>
+          <input type="text" class="form-control" name="name" ngModel
+          [ngClass]="{'has-danger': !name.valid && name.touched}"
+          #name="ngModel"
+          required/>
+          <span *ngIf="!name.valid && name.touched">Please Enter Ingredient Name</span>
+        </div>
+
+        <div class="col-sm-2 form-group">
+          <label>Amount: </label>
+          <input type="text" class="form-control" name="amount" ngModel
+          [ngClass]="{'has-danger': !amount.valid && amount.touched}"
+          #amount="ngModel"
+          required
+          [pattern]="'^[1-9]+[0-9]*$'"/>
+          <span class="help-block" *ngIf="!amount.valid && amount.touched
+          && amount.errors.required">Please Enter Amount</span>
+          <span class="help-block" *ngIf="!amount.valid && amount.touched
+          && amount.errors.pattern">Please Enter Valid Amount</span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <button *ngIf="shoppingForm" class="btn btn-success" type="submit" [disabled]="!shoppingForm.valid">{{ editMode ? 'Update' : 'Add' }}</button>
+          <button class="btn btn-danger" type="button" (click)="deleteItem()" [disabled]="!editMode">Delete</button>
+          <button class="btn btn-secondry" type="reset">Clear</button>
+        </div>
+        
+      </div>
+    </form>
+  </div>
+</div>
