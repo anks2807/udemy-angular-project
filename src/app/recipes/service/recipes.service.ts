@@ -6,60 +6,13 @@ export class RecipeService {
 
     addUpdateSuccess: Subject<boolean> = new Subject();
 
-    recipes: Recipe[] = [
-        {
-            id: 1,
-            name: 'Corn Curry',
-            description: 'Description For Corp Curry',
-            imagePath: '../../assets/img/recipe1.jpg',
-            ingredients: [
-                {
-                    name: 'Corn',
-                    amount: 20
-                },
-                {
-                    name: 'Spices',
-                    amount: 30
-                }
-            ]
-        },
-        {
-            id: 2,
-            name: 'Dal Fry',
-            description: 'Description For Dal Fry',
-            imagePath: '../../assets/img/recipe2.jpg',
-            ingredients: [
-                {
-                    name: 'Pulse',
-                    amount: 100
-                },
-                {
-                    name: 'Spices',
-                    amount: 30
-                }
-            ]
-        },
-        {
-            id: 3,
-            name: 'Italian Pizza',
-            description: 'Description For Pizza',
-            imagePath: '../../assets/img/recipe3.jpg',
-            ingredients: [
-                {
-                    name: 'Pizza Base',
-                    amount: 100
-                },
-                {
-                    name: 'Mozerella Cheese',
-                    amount: 10
-                },
-                {
-                    name: 'Mashrooms',
-                    amount: 10
-                }
-            ]
-        }
-    ];
+    private recipes: Recipe[] = [];
+
+
+    public setRecipes(recipes: Recipe[]) {
+        this.recipes = recipes;
+        this.addUpdateSuccess.next(true);
+    }
 
     public getRecipes() {
         return this.recipes.slice();
