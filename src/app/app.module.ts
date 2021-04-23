@@ -16,7 +16,9 @@ import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.com
 import { RecipeItemComponent } from './recipes/recipe-item/recipe-item.component';
 import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
 import { RecipeService } from './recipes/service/recipes.service';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
+import { AuthenticationComponent } from './authentication/authentication.component';
+import { LoadingComponent } from './shared/loading/loading.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +31,9 @@ import { HttpClientModule } from '@angular/common/http'
     DropdownItemDirective,
     ShoppingListEditComponent,
     PageNotFoundComponent,
-    RecipeEditComponent
+    RecipeEditComponent,
+    AuthenticationComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
