@@ -19,6 +19,7 @@ import { RecipeService } from './recipes/service/recipes.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthenticationComponent } from './authentication/authentication.component';
 import { LoadingComponent } from './shared/loading/loading.component';
+import { SessionService } from './shared/session.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +43,7 @@ import { LoadingComponent } from './shared/loading/loading.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [ShoppingService, RecipeService],
+  providers: [ShoppingService, RecipeService, SessionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

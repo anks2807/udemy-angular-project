@@ -1,5 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { RecipeService } from '../recipes/service/recipes.service';
+import { SessionService } from '../shared/session.service';
 import { DataStorageService } from './../shared/data-storage.service';
 @Component({
   selector: 'app-header',
@@ -7,9 +8,14 @@ import { DataStorageService } from './../shared/data-storage.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  constructor(private dataStorageService: DataStorageService, private recipeService: RecipeService) { }
+  @Input() userInfo: string;
+  constructor(
+    private dataStorageService: DataStorageService,
+    private recipeService: RecipeService,
+    private sessionService: SessionService) { }
 
   ngOnInit() {
+      window.console.log(this.userInfo);
   }
 
 
