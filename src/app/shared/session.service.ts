@@ -8,11 +8,14 @@ export const SESSION_KEYS = {
   };
 export class SessionService {
     private session: Map<string, any> = new Map<string, any>();
-    private loginSuccessful = new Subject<{email: string, accessToken: string}>();
 
     set(key: string, value: any) {
         this.session.set(key, value);
         localStorage.setItem(key, value);
+    }
+
+    get(key: string) {
+        return this.session.get(key);
     }
 
     isValidSession(): boolean {
@@ -20,14 +23,6 @@ export class SessionService {
             return true;
         }
         return false;
-    }
-
-    setLoginInfo(email: string, accessToken: string) {
-        this.loginSuccessful.next({email: email, accessToken: accessToken});
-    }
-
-    getLoginInfo(): Observable<{email: string, accessToken: string}> {
-        return this.loginSuccessful.asObservable();
     }
 
     clear() {

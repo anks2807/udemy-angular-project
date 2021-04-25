@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../authentication/services/authentication.service';
 import { RecipeService } from '../recipes/service/recipes.service';
 import { SessionService } from '../shared/session.service';
 import { DataStorageService } from './../shared/data-storage.service';
@@ -12,7 +14,8 @@ export class HeaderComponent implements OnInit {
   constructor(
     private dataStorageService: DataStorageService,
     private recipeService: RecipeService,
-    private sessionService: SessionService) { }
+    private authService: AuthService,
+    private router: Router) { }
 
   ngOnInit() {
       window.console.log(this.userInfo);
@@ -29,6 +32,11 @@ export class HeaderComponent implements OnInit {
     this.dataStorageService.fetchData().subscribe(response => {
       this.recipeService.setRecipes(response);
     });
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['login']);
   }
 
 }

@@ -8,8 +8,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-authentication',
   templateUrl: './authentication.component.html',
-  styleUrls: ['./authentication.component.css'],
-  providers: [AuthService]
+  styleUrls: ['./authentication.component.css']
 })
 export class AuthenticationComponent implements OnInit, AfterViewInit {
   isLoginMode: boolean = true;
@@ -21,7 +20,6 @@ export class AuthenticationComponent implements OnInit, AfterViewInit {
   errorMessages: string[];
   constructor(
     private authService: AuthService,
-    private sessionService: SessionService,
     private router: Router) { }
 
   ngOnInit(): void {
@@ -57,12 +55,6 @@ export class AuthenticationComponent implements OnInit, AfterViewInit {
       });
     } else {
       this.authService.login(this.authForm.value.email, this.authForm.value.password).subscribe((response: AuthResponse) => {
-        this.sessionService.set(SESSION_KEYS.ACCESS_TOKEN, response.idToken);
-        this.sessionService.set(SESSION_KEYS.REFRESH_TOKEN, response.refreshToken);
-        this.sessionService.set(SESSION_KEYS.USER_INFO, response.email);
-        this.sessionService.set(SESSION_KEYS.EXPIRE_IN, new Date(new Date().getTime() + +response.expiresIn * 1000));
-        
-        this.sessionService.setLoginInfo(response.email, response.idToken);
         this.router.navigate(['/recipes']);
         this.isLoading = false;
       }, error => {

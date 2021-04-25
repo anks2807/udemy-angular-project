@@ -16,10 +16,11 @@ import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.com
 import { RecipeItemComponent } from './recipes/recipe-item/recipe-item.component';
 import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
 import { RecipeService } from './recipes/service/recipes.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthenticationComponent } from './authentication/authentication.component';
 import { LoadingComponent } from './shared/loading/loading.component';
 import { SessionService } from './shared/session.service';
+import { AuthInterceptor } from './shared/auth-interceptor.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +44,14 @@ import { SessionService } from './shared/session.service';
     FormsModule,
     HttpClientModule
   ],
-  providers: [ShoppingService, RecipeService, SessionService],
+  providers: [ShoppingService,
+    RecipeService,
+    SessionService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

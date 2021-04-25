@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AuthService } from './authentication/services/authentication.service';
 import { SessionService } from './shared/session.service';
 
 @Component({
@@ -13,12 +14,16 @@ export class AppComponent implements OnInit, OnDestroy {
   isLoggedIn: boolean = false;
   userInfo: string;
   subscription: Subscription;
-  constructor(private sessionService: SessionService) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit() {
-    this.subscription = this.sessionService.getLoginInfo().subscribe(data => {
-      this.isLoggedIn = true;
-      this.userInfo = data.email;
+    this.subscription = this.authService.getLoginInfo().subscribe(data => {
+      if (data && data.email) {
+        this.isLoggedIn = true;
+        this.userInfo = data.email;
+      } else {
+        this.isLoggedIn = false;
+      }
     });
 
   }
