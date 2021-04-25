@@ -41,7 +41,7 @@ export class AuthenticationComponent implements OnInit, AfterViewInit {
       this.authService.signUp(this.authForm.value.email, this.authForm.value.password).subscribe((response: AuthResponse) => {
         if (response) {
           this.userAdded = true;
-          window.console.log(response);
+          // window.console.log(response);
         }
         this.isLoading = false;
       }, (error) => {
@@ -56,7 +56,6 @@ export class AuthenticationComponent implements OnInit, AfterViewInit {
     } else {
       this.authService.login(this.authForm.value.email, this.authForm.value.password).subscribe((response: AuthResponse) => {
         this.router.navigate(['/recipes']);
-        this.isLoading = false;
       }, error => {
         this.isLoading = false;
         this.isError = true;
