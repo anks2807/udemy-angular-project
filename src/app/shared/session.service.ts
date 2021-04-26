@@ -25,6 +25,21 @@ export class SessionService {
         return false;
     }
 
+    isValidStorage(): boolean {
+        if (localStorage.getItem(SESSION_KEYS.ACCESS_TOKEN) && localStorage.getItem(SESSION_KEYS.REFRESH_TOKEN)
+        && localStorage.getItem(SESSION_KEYS.USER_INFO) && localStorage.getItem(SESSION_KEYS.EXPIRE_IN)) {
+            return true;
+        }
+        return false;
+    }
+
+    reInitializeSession() {
+        this.session.set(SESSION_KEYS.ACCESS_TOKEN, localStorage.getItem(SESSION_KEYS.ACCESS_TOKEN));
+        this.session.set(SESSION_KEYS.REFRESH_TOKEN, localStorage.getItem(SESSION_KEYS.REFRESH_TOKEN));
+        this.session.set(SESSION_KEYS.USER_INFO, localStorage.getItem(SESSION_KEYS.USER_INFO));
+        this.session.set(SESSION_KEYS.EXPIRE_IN, localStorage.getItem(SESSION_KEYS.EXPIRE_IN));
+    }
+
     clear() {
         this.session.clear();
         localStorage.clear();

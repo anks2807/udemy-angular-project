@@ -39,6 +39,10 @@ export class AuthService {
         this.loginSuccessful.next({email: response.email, accessToken: response.idToken});
     }
 
+    triggerLogin(info: {email: string, accessToken: string}) {
+        this.loginSuccessful.next(info);
+    }
+
     getLoginInfo(): Observable<{email: string, accessToken: string}> {
         return this.loginSuccessful.asObservable();
     }

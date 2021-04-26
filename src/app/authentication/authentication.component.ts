@@ -2,7 +2,6 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { NgForm } from '@angular/forms';
 import { AuthService } from './services/authentication.service';
 import { AuthResponse } from './model/auth-resposne.model';
-import { SessionService, SESSION_KEYS } from '../shared/session.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -23,6 +22,7 @@ export class AuthenticationComponent implements OnInit, AfterViewInit {
     private router: Router) { }
 
   ngOnInit(): void {
+    this.authService.logout();
   }
 
   ngAfterViewInit() {
@@ -41,7 +41,6 @@ export class AuthenticationComponent implements OnInit, AfterViewInit {
       this.authService.signUp(this.authForm.value.email, this.authForm.value.password).subscribe((response: AuthResponse) => {
         if (response) {
           this.userAdded = true;
-          // window.console.log(response);
         }
         this.isLoading = false;
       }, (error) => {
