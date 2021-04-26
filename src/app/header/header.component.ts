@@ -35,6 +35,9 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
+    if (this.authService.getAutoLogoutTimer()) {
+      clearTimeout(this.authService.getAutoLogoutTimer());
+    }
     this.authService.logout();
     this.router.navigate(['login']);
   }

@@ -4,13 +4,15 @@ import { Observable, Subject, throwError } from 'rxjs';
 import { AuthResponse } from './../model/auth-resposne.model'
 import { catchError, tap } from 'rxjs/operators';
 import { SessionService, SESSION_KEYS } from 'src/app/shared/session.service';
+import { Router } from '@angular/router';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
 
     private loginSuccessful = new Subject<{email: string, accessToken: string}>();
-
-    constructor(private http: HttpClient, private sessionService: SessionService) {}
+    private autoLogoutTimeout: any
+    constructor(private http: HttpClient, private sessionService: SessionService,
+        private router: Router) {}
     
     signUp(email: string, password: string): Observable<AuthResponse> {
         const url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAXGKTZh8jKw8D9FEuJK9Sity7NSnIHQRg'
@@ -51,6 +53,17 @@ export class AuthService {
     logout() {
         this.sessionService.clear();
         this.loginSuccessful.next(null);
+    }
+
+    setAutoLogout(expireTime: number) {
+        this.autoLogoutTimeout = setTimeout(() => {
+          this.logout();
+          this.router.navigate(['login']);
+        }, expireTime);
+    }
+
+    getAutoLogoutTimer() {
+        return this.autoLogoutTimeout;
     }
 
     private handleError(error: HttpErrorResponse) {
