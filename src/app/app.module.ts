@@ -21,6 +21,8 @@ import { AuthenticationComponent } from './authentication/authentication.compone
 import { LoadingComponent } from './shared/loading/loading.component';
 import { SessionService } from './shared/session.service';
 import { AuthInterceptor } from './shared/auth-interceptor.service';
+import { AlertComponent } from './shared/alert/alert.component';
+import { DynamicComp } from './shared/dynamic-comp.directive';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +37,9 @@ import { AuthInterceptor } from './shared/auth-interceptor.service';
     PageNotFoundComponent,
     RecipeEditComponent,
     AuthenticationComponent,
-    LoadingComponent
+    LoadingComponent,
+    AlertComponent,
+    DynamicComp
   ],
   imports: [
     BrowserModule,
@@ -44,7 +48,8 @@ import { AuthInterceptor } from './shared/auth-interceptor.service';
     FormsModule,
     HttpClientModule
   ],
-  providers: [ShoppingService,
+  providers: [
+    ShoppingService,
     RecipeService,
     SessionService,
     {
