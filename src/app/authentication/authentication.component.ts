@@ -33,7 +33,9 @@ export class AuthenticationComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   ngOnDestroy() {
-    this.closeSubs.unsubscribe();
+    if (this.closeSubs) {
+      this.closeSubs.unsubscribe();
+    }
   }
 
   switchMode() {
