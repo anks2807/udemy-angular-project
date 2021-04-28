@@ -6,7 +6,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { SessionService, SESSION_KEYS } from 'src/app/shared/session.service';
 import { Router } from '@angular/router';
 
-@Injectable({providedIn: 'root'})
+@Injectable()
 export class AuthService {
 
     private loginSuccessful = new Subject<{email: string, accessToken: string}>();

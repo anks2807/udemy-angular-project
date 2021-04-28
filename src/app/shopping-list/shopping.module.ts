@@ -4,6 +4,7 @@ import { ShoppingListEditComponent } from '../shopping-list/shopping-list-edit/s
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ShoppingRouteModule } from './shopping-routing.module';
+import { SharedModule } from '../shared/shared.module';
 @NgModule({
     declarations: [
         ShoppingListComponent,
@@ -13,7 +14,8 @@ import { ShoppingRouteModule } from './shopping-routing.module';
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        ShoppingRouteModule
+        ShoppingRouteModule,
+        SharedModule
     ]
 })
 export class ShopppingModule {

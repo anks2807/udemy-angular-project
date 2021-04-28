@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ShoppingService } from 'src/app/shopping-list/service/shopping.service';
 import { Recipe } from '../model/recipe.model';
