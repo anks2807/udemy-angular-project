@@ -15,7 +15,7 @@ import { AuthService } from './services/authentication.service';
         FormsModule,
         SharedModule,
         RouterModule.forChild([
-            {path: 'login', component: AuthenticationComponent}
+            {path: '', component: AuthenticationComponent}
         ])
     ],
     exports: [RouterModule],

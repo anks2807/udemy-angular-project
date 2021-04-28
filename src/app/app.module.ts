@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { ShoppingService } from './shopping-list/service/shopping.service';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RecipeService } from './recipes/service/recipes.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SessionService } from './shared/session.service';

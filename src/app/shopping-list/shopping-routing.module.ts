@@ -4,7 +4,7 @@ import { ShoppingListComponent } from '../shopping-list/shopping-list.component'
 import { CanActivateGuard } from '../shared/can-activate.guard'; 
 
 const routes: Routes = [
-    {path: 'shopping-list', component: ShoppingListComponent, canActivate: [CanActivateGuard]}
+    {path: '', component: ShoppingListComponent, canActivate: [CanActivateGuard]}
 ]
 @NgModule({
     imports: [RouterModule.forChild(routes)],
