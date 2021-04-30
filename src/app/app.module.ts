@@ -12,6 +12,7 @@ import { AuthInterceptor } from './shared/auth-interceptor.service';
 import { RecipeModule } from './recipes/recipes.module';
 import { AuthModule } from './authentication/auth.module';
 import { ShopppingModule } from './shopping-list/shopping.module';
+import { SharedModule } from './shared/shared.module';
  
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { ShopppingModule } from './shopping-list/shopping.module';
   imports: [
     BrowserModule,
     RecipeModule,
+    SharedModule,
     AuthModule,
     ShopppingModule,
     AppRoutingModule,

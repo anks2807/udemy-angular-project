@@ -5,7 +5,7 @@ import { AuthResponse } from './../model/auth-resposne.model'
 import { catchError, tap } from 'rxjs/operators';
 import { SessionService, SESSION_KEYS } from 'src/app/shared/session.service';
 import { Router } from '@angular/router';
-
+import { environment } from '../../../environments/environment';
 @Injectable()
 export class AuthService {
 
@@ -15,7 +15,7 @@ export class AuthService {
         private router: Router) {}
     
     signUp(email: string, password: string): Observable<AuthResponse> {
-        const url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAXGKTZh8jKw8D9FEuJK9Sity7NSnIHQRg'
+        const url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.firebaseAPIKey}`;
         return this.http.post<AuthResponse>(url, {
             email: email,
             password: password,
@@ -25,7 +25,7 @@ export class AuthService {
     }
 
     login(email: string, password: string): Observable<AuthResponse> {
-        const url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAXGKTZh8jKw8D9FEuJK9Sity7NSnIHQRg';
+        const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.firebaseAPIKey}`;
         return this.http.post<AuthResponse>(url, {
             email: email,
             password: password,
