@@ -13,6 +13,8 @@ import { RecipeModule } from './recipes/recipes.module';
 import { AuthModule } from './authentication/auth.module';
 import { ShopppingModule } from './shopping-list/shopping.module';
 import { SharedModule } from './shared/shared.module';
+import { StoreModule } from '@ngrx/store';
+import { shoppingListReducer } from './shopping-list/store/shoppingList.reducer';
  
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { SharedModule } from './shared/shared.module';
     AuthModule,
     ShopppingModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    StoreModule.forRoot({shoppingList: shoppingListReducer})
   ],
   providers: [
     ShoppingService,

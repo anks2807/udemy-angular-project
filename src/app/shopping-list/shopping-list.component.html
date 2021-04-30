@@ -3,7 +3,7 @@
     <app-shopping-list-edit (addSuccess)="addSuccess($event)"></app-shopping-list-edit>
     <hr>
     <ul class="list-group">
-      <li class="list-group-item" *ngFor="let ing of ingredients; let i = index" style="cursor: pointer;">
+      <li class="list-group-item" *ngFor="let ing of (ingredients | async).ingredients; let i = index" style="cursor: pointer;">
          <a (click)="selectIngredient(i)"> {{ing.name}} - {{ing.amount}} </a>
       </li>
     </ul>
