@@ -1,9 +1,13 @@
+import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { Ingredient } from '../model/ingredient.model';
+import * as ShoppingListActions from '../store/shoppingList.action';
 
+@Injectable()
 export class ShoppingService {
     ingredientSelected: Subject<number> = new Subject();
-    constructor() {}
+    constructor(private store: Store<{shoppingList: {ingredients: Ingredient[]}}>) {}
     ingredients: Ingredient[] = [
         {
             amount: 1,
@@ -38,6 +42,6 @@ export class ShoppingService {
     }
 
     addIngredients(ingredients: Ingredient[]) {
-        ingredients.forEach(ins => this.addIngredient(ins));
+        this.store.dispatch(new ShoppingListActions.AddIngredientsAction(ingredients));
     }
 }

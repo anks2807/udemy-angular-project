@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ShoppingService } from 'src/app/shopping-list/service/shopping.service';
 import { Recipe } from '../model/recipe.model';
@@ -11,7 +11,6 @@ import { RecipeService } from '../service/recipes.service';
 })
 export class RecipeDetailComponent implements OnInit {
   recipe: Recipe;
-  @Output() addIngredientSuccess: EventEmitter<any> = new EventEmitter();
   constructor(private shoppingService: ShoppingService,
               private recipeService: RecipeService,
               private route: ActivatedRoute,
@@ -23,7 +22,6 @@ export class RecipeDetailComponent implements OnInit {
 
   getIngredients() {
     this.shoppingService.addIngredients(this.recipe.ingredients);
-    this.addIngredientSuccess.emit();
   }
 
   getRecipe() {

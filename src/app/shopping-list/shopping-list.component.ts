@@ -25,10 +25,6 @@ export class ShoppingListComponent implements OnInit {
     this.ingredients = this.store.select('shoppingList');
   }
 
-  addSuccess(event) {
-    this.ingredients = this.store.select('shoppingList');
-  }
-
   selectIngredient(index: number) {
     this.shoppoingService.selectIngredient(index);
   }

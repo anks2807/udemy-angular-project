@@ -9,7 +9,6 @@ import { RecipeService } from './service/recipes.service';
 })
 export class ReceipesComponent implements OnInit {
   selectedRecipe: boolean = false;
-  @Output() addSuccess: EventEmitter<any> = new EventEmitter();
   constructor() { }
 
   ngOnInit() {
@@ -17,10 +16,6 @@ export class ReceipesComponent implements OnInit {
 
   recipeClicked(event) {
     this.selectedRecipe = event;
-  }
-
-  addIngredientSuccess() {
-    this.addSuccess.emit();
   }
 
 }
