@@ -2,9 +2,10 @@ import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChi
 import { NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
+import { timestamp } from 'rxjs/operators';
 import { Ingredient } from '../model/ingredient.model';
-import { ShoppingService } from '../service/shopping.service';
 import * as ShoppingListActions from '../store/shoppingList.action';
+import { AppState } from '../store/shoppingList.reducer';
 
 @Component({
   selector: 'app-shopping-list-edit',
@@ -17,20 +18,25 @@ export class ShoppingListEditComponent implements OnInit, OnDestroy {
   @Output() addSuccess: EventEmitter<any> = new EventEmitter();
   ingrdientSubscription: Subscription;
   editIngredeintIndex: number;
-  constructor(private shoppingService: ShoppingService,
-    private store: Store<{shoppingList: {ingredients: Ingredient[]}}>) { }
+  constructor(private store: Store<AppState>) { }
 
   ngOnInit() {
-    this.ingrdientSubscription = this.shoppingService.ingredientSelected.subscribe((index: number) => {
-      this.editIngredeintIndex = index;
-      this.store.select('shoppingList').subscribe((ig) => {
+    this.ingrdientSubscription = this.store.select('shoppingList').subscribe(data => {
+      if (data.editIndex > -1) {
+        this.editIngredeintIndex = data.editIndex;
         this.shoppingForm.form.setValue({
-          name: ig.ingredients[this.editIngredeintIndex].name,
-          amount: ig.ingredients[this.editIngredeintIndex].amount
+          name: data.editIngredient.name,
+          amount: data.editIngredient.amount
         });
         this.editMode = true;
-      });
+      } else {
+        this.editMode = false;
+        if (this.shoppingForm) {
+          this.shoppingForm.reset();
+        }
+      }
     });
+    
   }
 
   ngOnDestroy() {
@@ -53,6 +59,10 @@ export class ShoppingListEditComponent implements OnInit, OnDestroy {
   deleteItem() {
     this.store.dispatch(new ShoppingListActions.DeleteIngredientAction({index: this.editIngredeintIndex}));
     this.shoppingForm.reset();
+  }
+
+  stopEdit() {
+    this.store.dispatch(new ShoppingListActions.StopEdit());
   }
 
 }

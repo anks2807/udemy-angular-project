@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { ShoppingService } from './shopping-list/service/shopping.service';
 import { RecipeService } from './recipes/service/recipes.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SessionService } from './shared/session.service';
@@ -32,7 +31,6 @@ import { shoppingListReducer } from './shopping-list/store/shoppingList.reducer'
     StoreModule.forRoot({shoppingList: shoppingListReducer})
   ],
   providers: [
-    ShoppingService,
     RecipeService,
     SessionService,
     {

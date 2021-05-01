@@ -4,7 +4,8 @@ import { Observable } from 'rxjs';
 import { AuthService } from '../authentication/services/authentication.service';
 import { SessionService, SESSION_KEYS } from '../shared/session.service';
 import { Ingredient } from './model/ingredient.model';
-import { ShoppingService } from './service/shopping.service';
+import { AppState } from './store/shoppingList.reducer';
+import * as ShoppingListActions from './store/shoppingList.action';
 
 @Component({
   selector: 'app-shopping-list',
@@ -13,9 +14,8 @@ import { ShoppingService } from './service/shopping.service';
 })
 export class ShoppingListComponent implements OnInit {
   ingredients: Observable<{ ingredients: Ingredient[]}>;
-  constructor(private shoppoingService: ShoppingService,
-    private authService: AuthService, private sessionService: SessionService,
-    private store: Store<{shoppingList: {ingredients: Ingredient[]}}>) { }
+  constructor(private authService: AuthService, private sessionService: SessionService,
+    private store: Store<AppState>) { }
 
   ngOnInit() {
     this.authService.triggerLogin({
@@ -26,7 +26,10 @@ export class ShoppingListComponent implements OnInit {
   }
 
   selectIngredient(index: number) {
-    this.shoppoingService.selectIngredient(index);
+    const payload = {
+      editIndex: index
+    }
+    this.store.dispatch(new ShoppingListActions.StartEdit(payload));
   }
 
 }
